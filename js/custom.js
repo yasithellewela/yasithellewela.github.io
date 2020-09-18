@@ -1,73 +1,36 @@
-
-// JavaScript Document
-$('#subscribeform').submit(function(){
-
-	var action = $(this).attr('action');
-
-		$("#mesaj").slideUp(750,function() {
-
-
-
-		$('#mesaj').hide();
-
-	$('#subsubmit')
-
-
-
-			.after('')
-
-
-
-			.attr('disabled','disabled');
-
-	$.post(action, {
-
-
-
-			email: $('#subemail').val()
-
-
-
-		},
-
-
-
-			function(data){
-
-
-
-				document.getElementById('mesaj').innerHTML = data;
-
-
-
-				$('#mesaj').slideDown('slow');
-
-
-
-				$('#subscribeform img.subscribe-loader').fadeOut('slow',function(){$(this).remove()});
-
-
-
-				$('#subsubmit').removeAttr('disabled');
-
-
-
-				if(data.match('success') != null) $('#subscribeform').slideUp('slow');
-
-			}
-
-
-
-		);
-
-
-
-		});
-
-
-
-		return false;
-
-
-
+(function ($) {
+
+  "use strict";
+
+    // COLOR MODE
+    $('.color-mode').click(function(){
+        $('.color-mode-icon').toggleClass('active')
+        $('body').toggleClass('dark-mode')
+    })
+
+    // HEADER
+    $(".navbar").headroom();
+
+    // PROJECT CAROUSEL
+    $('.owl-carousel').owlCarousel({
+    	items: 1,
+	    loop:true,
+	    margin:10,
+	    nav:true
 	});
+
+    // SMOOTHSCROLL
+    $(function() {
+      $('.nav-link, .custom-btn-link').on('click', function(event) {
+        var $anchor = $(this);
+        $('html, body').stop().animate({
+            scrollTop: $($anchor.attr('href')).offset().top - 49
+        }, 1000);
+        event.preventDefault();
+      });
+    });  
+
+    // TOOLTIP
+    $('.social-links a').tooltip();
+
+})(jQuery);
